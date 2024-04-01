@@ -1,6 +1,7 @@
 {
   "name": "ckeditor5-vite-example",
   "homepage": "https://github.com/lorenleedev/ck-editor-2",
+  "url": "https://github.com/lorenleedev/ck-editor-2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
