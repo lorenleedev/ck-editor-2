@@ -8,9 +8,11 @@
   "scripts": {
     "dev": "./node_modules/.bin/vite",
     "build": "./node_modules/.bin/vite build",
-    "preview": "./node_modules/.bin/vite preview"
+    "preview": "./node_modules/.bin/vite preview",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "devDependencies": {
+    "push-dir": "^0.4.1",
     "vite": "^5.0.12"
   },
   "dependencies": {
