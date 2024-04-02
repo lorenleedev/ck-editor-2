@@ -126,3 +126,16 @@ const element = document.querySelector( '#ck-editor' );
   window.editor = editor;
 })();
 
+window.addEventListener('message', (event) => {
+  console.log('event.data', event.data);
+    if (event.data.type === 'CKEDITOR_SET_DATA') {
+        window.editor.setData(event.data.data);
+    }
+    if (event.data.type === 'CKEDITOR_GET_DATA') {
+        window.parent.postMessage({
+        type: 'CKEDITOR_DATA',
+        data: window.editor.getData()
+        }, '*');
+    }
+});
+
