@@ -24,7 +24,7 @@ import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { AutoImage } from '@ckeditor/ckeditor5-image';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
-const initEditor = async ({lang}) => {
+const initEditor = async ({lang = 'en'}) => {
   const element = document.querySelector( '#ck-editor' );
 
   const editor = await ClassicEditor.create( element, {
