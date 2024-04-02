@@ -12,17 +12,18 @@ import {
   Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload
 } from '@ckeditor/ckeditor5-image';
 import { LinkImage } from '@ckeditor/ckeditor5-link';
-import { Indent } from '@ckeditor/ckeditor5-indent';
+import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import {HorizontalLine} from "@ckeditor/ckeditor5-horizontal-line";
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { Link } from '@ckeditor/ckeditor5-link';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
-import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
+import { Table, TableToolbar, TableColumnResize, TableCaption } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { AutoImage } from '@ckeditor/ckeditor5-image';
+import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 // Get the HTML element with the ID of 'app'.
 const element = document.querySelector( '#ck-editor' );
@@ -44,6 +45,7 @@ const element = document.querySelector( '#ck-editor' );
       Heading,
       FontBackgroundColor,
       List,
+      IndentBlock,
       Indent,
       HorizontalLine,
       BlockQuote,
@@ -52,6 +54,8 @@ const element = document.querySelector( '#ck-editor' );
       PasteFromOffice,
       Table,
       TableToolbar,
+      TableColumnResize,
+      TableCaption,
       TextTransformation,
       CloudServices,
       Autoformat,
@@ -64,6 +68,7 @@ const element = document.querySelector( '#ck-editor' );
       ImageToolbar,
       LinkImage,
       ImageUpload,
+      Base64UploadAdapter
     ],
 
     // Add the toolbar configuration.
