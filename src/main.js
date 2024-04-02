@@ -1,4 +1,3 @@
-// Import the editor
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
@@ -24,8 +23,6 @@ import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { AutoImage } from '@ckeditor/ckeditor5-image';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
-
-// Get the HTML element with the ID of 'app'.
 
 const initEditor = async ({lang}) => {
   const element = document.querySelector( '#ck-editor' );
@@ -137,13 +134,14 @@ const initEditor = async ({lang}) => {
 
 window.addEventListener('message', (event) => {
     if (event.data.type === 'CKEDITOR_INIT') {
+        console.log('CKEDITOR_INIT', event.data.data)
         initEditor({lang: event.data.data});
     }
 
-    if (event.data.type === 'CKEDITOR_SET_DATA') {
+    if (event.data.type === 'CKEDITOR_SET_DATA' && window.editor) {
         window.editor.setData(event.data.data);
     }
-    if (event.data.type === 'CKEDITOR_GET_DATA') {
+    if (event.data.type === 'CKEDITOR_GET_DATA' && window.editor) {
         window.parent.postMessage({
         type: 'CKEDITOR_DATA',
         data: window.editor.getData()
