@@ -26,9 +26,10 @@ import { AutoImage } from '@ckeditor/ckeditor5-image';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 // Get the HTML element with the ID of 'app'.
-const element = document.querySelector( '#ck-editor' );
 
-(async () => {
+const initEditor = async ({lang}) => {
+  const element = document.querySelector( '#ck-editor' );
+
   const editor = await ClassicEditor.create( element, {
     plugins: [
       Essentials,
@@ -103,7 +104,8 @@ const element = document.querySelector( '#ck-editor' );
         'insertTable',
       ]
     },
-    language: 'en',
+    language: lang,
+    placeholder: lang === 'ko' ? '내용을 입력해주세요' : 'Please enter content',
     image: {
       toolbar: [
         'imageStyle:block',
@@ -124,16 +126,19 @@ const element = document.querySelector( '#ck-editor' );
       contentToolbar: [
         'tableColumn',
         'tableRow',
-        'mergeTableCells'
+        'mergeTableCells',
+        'tableProperties',
+        'toggleTableCaption',
       ]
     }
   } );
   window.editor = editor;
-})();
-
-console.log('배포 3');
+}
 
 window.addEventListener('message', (event) => {
+    if (event.data.type === 'CKEDITOR_INIT') {
+        initEditor({lang: event.data.data});
+    }
 
     if (event.data.type === 'CKEDITOR_SET_DATA') {
         window.editor.setData(event.data.data);
@@ -145,4 +150,3 @@ window.addEventListener('message', (event) => {
         }, '*');
     }
 });
-
