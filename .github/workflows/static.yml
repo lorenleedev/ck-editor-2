@@ -21,31 +21,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # 단순히 배포만 수행하기에 하나의 잡으로만 구성
+  # deploy 라는 job 입니다.
+  # 안에는 배포에 필요한 과정들을 기술하면 됩니다!
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 우분투에서 실행
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # dist 디렉터리 업로드
-          path: './dist'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # 레포지토리의 코드를 사용하기 위해 씁니다. 이게 없으면 빈 폴더에요!
+    - uses: actions/checkout@v3
+
+    # node.js 를 사용합니다.
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18 # 버전은 입맛대로 바꾸세요
+
+    - run: npm ci # package-lock.json 에 적혀있는 패키지를 그~대로 설치합니다.
+    - run: npm run build # package.json에 빌드 스크립트를 여기 적으세요
+    
+    # publish_dir에 들어있는 파일들을 gh-pages 브랜치에 올려줍니다.
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
