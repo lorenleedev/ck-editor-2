@@ -17,7 +17,7 @@ import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { Link } from '@ckeditor/ckeditor5-link';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
-import { Table, TableToolbar, TableColumnResize, TableCaption } from '@ckeditor/ckeditor5-table';
+import { Table, TableToolbar, TableColumnResize, TableCaption, TableCellProperties, TableProperties } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
@@ -54,6 +54,8 @@ const initEditor = async ({lang, initialData}) => {
       TableToolbar,
       TableColumnResize,
       TableCaption,
+      TableCellProperties,
+      TableProperties,
       TextTransformation,
       CloudServices,
       Autoformat,
@@ -99,12 +101,14 @@ const initEditor = async ({lang, initialData}) => {
         '|',
         'insertImage',
         'insertTable',
-      ]
+      ],
+      shouldNotGroupWhenFull: false
     },
     language: lang === 'ko' ? 'ko' : 'en-gb',
     placeholder: lang === 'ko' ? '내용을 입력해주세요' : 'Please enter content',
     image: {
       toolbar: [
+        'imageStyle:inline',
         'imageStyle:block',
         'imageStyle:side',
         '|',
@@ -125,6 +129,7 @@ const initEditor = async ({lang, initialData}) => {
         'tableRow',
         'mergeTableCells',
         'tableProperties',
+        'tableCellProperties',
         'toggleTableCaption',
       ]
     }
@@ -132,6 +137,8 @@ const initEditor = async ({lang, initialData}) => {
   window.editor = editor;
   window.editor.setData(initialData);
 }
+
+initEditor({lang: 'ko', initialData: ''});
 
 window.addEventListener('message', (event) => {
     if (event.data.type === 'CKEDITOR_INIT') {
