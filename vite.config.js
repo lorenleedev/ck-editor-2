@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5';
 
 export default defineConfig( {
+  base: 'ck-editor-2',
   plugins: [
     ckeditor5( {
       theme: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
