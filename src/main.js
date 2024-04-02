@@ -128,6 +128,9 @@ const element = document.querySelector( '#ck-editor' );
 
 window.addEventListener('message', (event) => {
   console.log('event.data', event.data);
+  alert('부모가 메세지를 보내왔다.!')
+  window.editor.setData(event.data.data);
+
     if (event.data.type === 'CKEDITOR_SET_DATA') {
         window.editor.setData(event.data.data);
     }
