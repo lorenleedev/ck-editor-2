@@ -138,7 +138,7 @@ const initEditor = async ({lang, initialData}) => {
   window.editor.setData(initialData);
 }
 
-initEditor({lang: 'ko', initialData: ''});
+// initEditor({lang: 'ko', initialData: ''});
 
 window.addEventListener('message', (event) => {
     if (event.data.type === 'CKEDITOR_INIT') {
