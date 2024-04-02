@@ -126,6 +126,7 @@ const element = document.querySelector( '#ck-editor' );
   window.editor = editor;
 })();
 
+console.log('배포 1')
 window.addEventListener('message', (event) => {
   console.log('event.data', event.data);
   alert('부모가 메세지를 보내왔다.!')
