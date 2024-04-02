@@ -24,7 +24,7 @@ import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { AutoImage } from '@ckeditor/ckeditor5-image';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
-const initEditor = async ({lang = 'en'}) => {
+const initEditor = async ({lang}) => {
   const element = document.querySelector( '#ck-editor' );
 
   const editor = await ClassicEditor.create( element, {
@@ -101,7 +101,7 @@ const initEditor = async ({lang = 'en'}) => {
         'insertTable',
       ]
     },
-    language: lang,
+    language: lang === 'ko' ? 'ko' : 'en-gb',
     placeholder: lang === 'ko' ? '내용을 입력해주세요' : 'Please enter content',
     image: {
       toolbar: [
